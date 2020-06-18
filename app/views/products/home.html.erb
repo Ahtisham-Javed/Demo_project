@@ -1,0 +1,18 @@
+<h1>Home Page</h1>
+<% if current_user %>
+  <div style="float:right;">
+    <%= link_to "Sign Out", destroy_user_session_path, method: :delete %> |
+    <%= link_to "Update Profile", edit_user_registration_path %> |
+    <%= link_to "Delete Account", user_registration_path, method: :delete, data: {confirm: 'Are you sure ?'} %>
+    <% if current_user.user_avatar.attached? %>
+      <%= image_tag current_user.user_avatar, class: "profile_image" %>	
+    <% end %>
+  </div>
+    <%= link_to "Create Product", new_product_path %> |
+    <%= link_to "My Products", current_user_products_products_path %> |
+    <%= link_to "My Shopping Cart", shipments_path %> |
+<% else %>
+	<%= link_to "Sign Up", new_user_registration_path %> |
+	<%= link_to "Sign In", new_user_session_path %> |
+<% end %>
+<%= link_to "All Products", products_path %>

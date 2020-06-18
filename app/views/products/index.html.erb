@@ -1,0 +1,7 @@
+<h1>Products Index Page</h1>
+<% @products.each do |p|%>
+  <h3>Title: <%= link_to p.title, product_path(p) %></h3>
+  <h4>Availability: <%= p.availability %></h4>
+  <h4>Price: <%= p.price %></h4>
+  <hr>
+<% end %>

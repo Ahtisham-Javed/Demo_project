@@ -1,0 +1,9 @@
+<%= form_for [cart, product, shipment], url: shipments_path(@shipment) do |f|%>
+  <%= f.label :quantity %>: 
+  <%= f.number_field :quantity, value: 1, min: 1, max: 50, step: 1 %>
+  <div style="display:none;">
+    <%= f.text_field :cart_id, value: cart.id %>
+    <%= f.text_field :product_id, value: product.id %>
+  </div>
+  <%= f.submit "Add to Cart" %> 
+<%end%>

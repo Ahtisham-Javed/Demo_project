@@ -1,0 +1,12 @@
+<%= form_for [product, comment] do |f| %>
+  <p>
+    <%= f.label :comment %>
+  </p>
+  <p>
+    <%= f.text_area :comment, required: true %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<%end%>

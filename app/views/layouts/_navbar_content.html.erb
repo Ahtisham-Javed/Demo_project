@@ -1,35 +1,47 @@
-<% if current_user && current_user.user_avatar.attached? %>
-  <%= image_tag current_user.user_avatar, class: "profile_image" %>
-<%elsif current_user %>
-  <%= image_tag image_url("default_profile.jpg"), class: "profile_image" %>
-<% end %>
-<li class="nav-item">
-  <%= link_to "All Products", products_path, class: "nav-link" %>
-</li>
+<ul class="navbar-nav">
+  <% if current_user && current_user.user_avatar.attached? %>
+    <%= image_tag current_user.user_avatar, class: "profile_image" %>
+  <%elsif current_user %>
+    <%= image_tag image_url("default_profile.jpg"), class: "profile_image" %>
+  <% end %>
+  <li class="nav-item">
+    <%= link_to "All Products", products_path, class: "nav-link" %>
+  </li>
+</ul>
 <% if current_user %>
-  <li class="nav-item">
-    <%= link_to "My Products", current_user_products_products_path,  class: "nav-link"%>
-  </li>
-  <li class="nav-item">
-    <%= link_to "My Shopping Cart", shipments_path,  class: "nav-link" %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Create Product", new_product_path,  class: "nav-link" %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Update Profile", edit_user_registration_path,  class: "nav-link" %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Delete Account", user_registration_path, method: :delete, data: {confirm: 'Are you sure ?'},  class: "nav-link" %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Sign Out", destroy_user_session_path, method: :delete,  class: "nav-link btn btn-dark" %>
-  </li>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <%= link_to "My Products", current_user_products_products_path,  class: "nav-link"%>
+    </li>
+    <li class="nav-item">
+      <%= link_to "My Shopping Cart", shipments_path,  class: "nav-link" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Create Product", new_product_path,  class: "nav-link" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Update Profile", edit_user_registration_path,  class: "nav-link" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Delete Account", user_registration_path, method: :delete, data: {confirm: 'Are you sure ?'},  class: "nav-link" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Sign Out", destroy_user_session_path, method: :delete,  class: "nav-link btn btn-dark" %>
+    </li>
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <%= form_tag products_path, method: :get, class: "form-inline my-2 my-lg-0" do %>
+      <%= text_field_tag :search, params[:search], class: "form-control mr-sm-2" %>
+      <%= submit_tag "Search", name: nil, class: "btn btn-outline-success my-2 my-sm-0" %>
+    <% end %>
+  </ul>
 <% else %>
-  <li class="nav-item">
-    <%= link_to "Sign Up", new_user_registration_path, class: "nav-link btn btn-dark" %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Sign In", new_user_session_path,  class: "nav-link btn btn-dark" %>
-  </li>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <%= link_to "Sign Up", new_user_registration_path, class: "nav-link btn btn-dark" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Sign In", new_user_session_path,  class: "nav-link btn btn-dark" %>
+    </li>
+  </ul>
 <% end %>

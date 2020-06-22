@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
 
-	# before_action :set_cache_headers, only: [:new, :create, :edit, :update] 
-	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :current_user_products] 
+	# before_action :set_cache_headers, only: [:new, :create, :edit, :update]
+	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :current_user_products]
 
 	def index
-		@products = Product.all
+		@products = Product.search(params[:search], order: :title)
 	end
 
 	def new
@@ -13,9 +13,9 @@ class ProductsController < ApplicationController
 
 	def create
 		@user = User.find(current_user.id)
-		@product = @user.products.create!(product_params) 
+		@product = @user.products.create!(product_params)
 		@product.update(serial_number: generate_serial_number(@product.id))
-		redirect_to product_path(@product), notice: "Product has been added successfully!"		
+		redirect_to product_path(@product), notice: "Product has been added successfully!"
 	end
 
 	def edit
@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
 		if Product.exists?(params[:id])
 			@product = Product.find(params[:id])
 		else
-			render :file => 'public/404.html' 
+			render :file => 'public/404.html'
 		end
 	end
 

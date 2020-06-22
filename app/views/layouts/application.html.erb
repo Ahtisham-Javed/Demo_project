@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Project</title>
+    <title>Demo Project</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= render 'layouts/alerts' %>
-    <%= link_to "Home Page", root_path %>
+  <body class="background_gray">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <ul class="navbar-nav">
+        <%= render 'layouts/navbar_content' %>
+      </ul>
+    </nav>
+    <%#= render 'layouts/alerts' %>
     <%= yield %>
   </body>
 </html>

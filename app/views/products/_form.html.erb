@@ -1,34 +1,38 @@
 <%= form_for @product do |f| %>
-  
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title, required: true %>
-  </p>
-
-  <p>
-    <%= f.label :price %><br>
-    <%= f.number_field :price, required: true %>
-  </p>
-  
-  <p>
-    <%= f.label :availability %><br>
-    <%= f.radio_button(:availability, true) %>
-    <%= f.label :yes %>
-    <%= f.radio_button(:availability, false) %>
-    <%= f.label :no %>
-  </p>
-
-   <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %><br>
-  </p>
-
-  <p>
+  <div class = 'form-group'>
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title, required: true, class: 'form-control' %>
+    </p>
+  </div>
+  <div class = 'form-group'>
+    <p>
+      <%= f.label :price %><br>
+      <%= f.number_field :price, required: true, class: 'form-control' %>
+    </p>
+  </div>
+  <div class = 'form-check'>
+    <p>
+      <%= f.label :availability %><br>
+      <%= f.radio_button :availability, true %>
+      <%= f.label :yes %><br>
+      <%= f.radio_button :availability, false %>
+      <%= f.label :no %>
+    </p>
+  </div>
+  <div class = 'form-group'>
+     <p>
+      <%= f.label :description %><br>
+      <%= f.text_area :description, class: 'form-control' %><br>
+    </p>
+  </div>
+  <div class = "custom-file">
     <%= f.label :Images %>
     <%= f.file_field :product_images, multiple: true %>
-  </p>
-
-  <p>
-    <%= f.submit %>
-  </p>
+  </div>
+  <br>
+  <br>
+  <div class = "form-group" style='text-align: center;'>
+    <%= f.submit class: 'btn btn-info' %>
+  </div>
 <% end %>

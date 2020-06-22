@@ -1,6 +1,13 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+
+gem 'jquery-rails'
+
+gem 'bootstrap', '~> 4.5.0'
+
+gem 'stripe'
+
 ruby '2.7.0'
 
 gem "mini_magick"

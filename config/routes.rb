@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     get "current_user_products", on: :collection
     resources :comments, only: [:create, :edit, :update, :destroy]
   end
-  
-  resources :shipments, except: [:new, :show]
-  
+
+  resources :shipments, except: [:new, :show] do
+    get "checkout_form", on: :collection
+  end
+
 end

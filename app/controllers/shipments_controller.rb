@@ -1,5 +1,7 @@
 class ShipmentsController < ApplicationController
-  
+
+  before_action :authenticate_user!
+
   def edit
     @shipment = Shipment.find(params[:id])
   end
@@ -31,6 +33,10 @@ class ShipmentsController < ApplicationController
     @shipment = Shipment.find(params[:id])
     @shipment.destroy
     redirect_to shipments_path, notice: "Product has been removed from cart"
+  end
+
+  def checkout_form
+
   end
 
   private

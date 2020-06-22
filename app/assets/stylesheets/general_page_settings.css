@@ -1,0 +1,18 @@
+.margin_on_both_sides{
+	padding-top: 3%;
+	padding-bottom: 3%;
+	margin-left: 30%;
+	margin-right: 30%;
+}
+
+.background_gray{
+	background-color: gray;
+}
+
+.heading_setting {
+	color: yellow;
+	text-align: center;
+	font-style: italic;
+	font-family: arial;
+	padding: 1%;
+}

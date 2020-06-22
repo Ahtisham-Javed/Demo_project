@@ -1,7 +1,8 @@
 class ProductsController < ApplicationController
 
-	before_action :set_cache_headers, only: [:new, :create, :edit, :update] 
-	
+	# before_action :set_cache_headers, only: [:new, :create, :edit, :update] 
+	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :current_user_products] 
+
 	def index
 		@products = Product.all
 	end
@@ -45,7 +46,7 @@ class ProductsController < ApplicationController
 	end
 
 	def current_user_products
-		authenticate_user
+		# authenticate_user
 		@products = Product.where(user_id: current_user.id).all
 		render 'index'
 	end
@@ -59,17 +60,17 @@ class ProductsController < ApplicationController
 			"PLN-%.6d" % id
 		end
 
-		def set_cache_headers
-			response.headers["Cache-Control"] = "no-cache, no-store"
-    	response.headers["Pragma"] = "no-cache"
-			response.headers["Expires"] = "Mon, 01 Jan 1990 00:00:00 GMT"
-			authenticate_user
-		end
+		# def set_cache_headers
+		# 	response.headers["Cache-Control"] = "no-cache, no-store"
+    # 	response.headers["Pragma"] = "no-cache"
+		# 	response.headers["Expires"] = "Mon, 01 Jan 1990 00:00:00 GMT"
+		# 	authenticate_user
+		# end
 
-		def authenticate_user
-			if current_user.nil?
-			  redirect_to new_user_session_path and return
-			end
-		end
+		# def authenticate_user
+		# 	if current_user.nil?
+		# 	  redirect_to new_user_session_path and return
+		# 	end
+		# end
 
 end

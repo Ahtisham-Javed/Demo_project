@@ -1,12 +1,24 @@
-<h1>Shipments index</h1>
-<%= link_to "CheckOut" %>
-<% @shipments.each do |shipment| %>
-  <p><strong>Title: </strong><%= shipment.product.title %></p>
-  <p><strong>Price: </strong><%= shipment.product.price %></p>
-  <p><strong>Quantity: </strong><%= shipment.quantity %></p>
-  <p>
-    <%= link_to "Edit", edit_shipment_path(shipment)  %> |
-    <%= link_to "Remove", shipment_path(shipment), method: :delete, data: {confirm: "Are u sure ?"} %>
-  </p>
-  <hr>
-<%end%>
+<div class = "margin_on_both_sides">
+	<h1 class="heading_setting">My Shopping Cart</h1>
+	<% @shipments.each do |shipment| %>
+		<div class="row">
+			<div class="col-md-10">
+			  <h3>Title: <%= shipment.product.title %></h3>
+			  <h4>Price: $<%= shipment.product.price %></h4>
+			  <h5>Quantity: <%= shipment.quantity %></h5>
+			  <h5>Subtotal: $<%= shipment.quantity * shipment.product.price%></h5>
+		  </div>
+		  <div style="padding: 1%" class="col-md-2">
+		  	<div style="margin-bottom: 10%" class="row">
+	  			<%= link_to "Edit", edit_shipment_path(shipment), class: "btn btn-info btn-block"  %>
+		  	</div>
+		  	<div class="row">
+		  		<%= link_to "Remove", shipment_path(shipment), method: :delete, data: {confirm: "Are u sure ?"}, class: "btn btn-info btn-block" %>
+		  	</div>
+		  </div>
+		</div>
+	  <hr>
+	<%end%>
+	<h3>Grand Total: $ asdfasdfasdf</h3>
+	<%= link_to "Place Order", checkout_form_shipments_path, class: "btn btn-success btn-lg btn-block" %>
+</div>

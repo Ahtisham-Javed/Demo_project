@@ -1,5 +1,6 @@
 <div class = "margin_on_both_sides">
 	<h1 class="heading_setting">My Shopping Cart</h1>
+	<% total = 0 %>
 	<% @shipments.each do |shipment| %>
 		<div class="row">
 			<div class="col-md-10">
@@ -7,6 +8,7 @@
 			  <h4>Price: $<%= shipment.product.price %></h4>
 			  <h5>Quantity: <%= shipment.quantity %></h5>
 			  <h5>Subtotal: $<%= shipment.quantity * shipment.product.price%></h5>
+			  <% total = total + (shipment.quantity * shipment.product.price) %>
 		  </div>
 		  <div style="padding: 1%" class="col-md-2">
 		  	<div style="margin-bottom: 10%" class="row">
@@ -19,6 +21,6 @@
 		</div>
 	  <hr>
 	<%end%>
-	<h3>Grand Total: $ asdfasdfasdf</h3>
+	<h3>Grand Total: $<%= total %></h3>
 	<%= link_to "Place Order", checkout_form_shipments_path, class: "btn btn-success btn-lg btn-block" %>
 </div>

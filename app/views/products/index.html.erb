@@ -1,10 +1,10 @@
 <h1 class="heading_setting">All Products</h1>
-<div class="card-deck" style="margin: 5%">
+<div class="card-deck" style="margin: 3%">
 	<% @products.each do |p|%>
 		<div class="card">
 	    <div class="card-body">
 	    	<% if p.product_images.attached? %>
-	    		<%= image_tag p.product_images.first, width: "100%", height: "60%" %>
+	    		<%= image_tag p.resize_image(0), width: "100%", height: "60%" %>
 	    	<%else%>
 	    		<%= image_tag "package.jpg", width: "100%", height: "60%" %>
 	    	<%end%>

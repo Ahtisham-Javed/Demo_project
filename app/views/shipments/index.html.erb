@@ -21,6 +21,8 @@
 		</div>
 	  <hr>
 	<%end%>
-	<h3>Grand Total: $<%= total %></h3>
-	<%= link_to "Place Order", checkout_form_shipments_path, class: "btn btn-success btn-lg btn-block" %>
+	<% if @shipments.size > 0 %>
+		<h3>Grand Total: $<%= total %></h3>
+		<%= link_to "Buy Now", checkout_create_path(:shipments => @shipments.map(&:id)), method: :post,remote: true, class: "btn btn-success btn-lg btn-block" %>
+	<%end%>
 </div>

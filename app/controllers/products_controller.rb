@@ -52,13 +52,13 @@ class ProductsController < ApplicationController
 	end
 
 	private
-		def product_params
-			params.require(:product).permit(:title, :price, :availability,:description,product_images: [])
-		end
+	def product_params
+		params.require(:product).permit(:title, :price, :availability,:description,product_images: [])
+	end
 
-		def generate_serial_number id
-			"PLN-%.6d" % id
-		end
+	def generate_serial_number id
+		"PLN-%.6d" % id
+	end
 
 		# def set_cache_headers
 		# 	response.headers["Cache-Control"] = "no-cache, no-store"

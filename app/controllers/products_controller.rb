@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
 	def index
 		@products = Product.search(params[:search], order: :title)
 	end
-
+	
 	def new
 		@product = Product.new
 	end

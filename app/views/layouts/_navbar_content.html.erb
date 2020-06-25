@@ -1,47 +1,58 @@
-<ul class="navbar-nav">
-  <% if current_user && current_user.user_avatar.attached? %>
-    <%= image_tag current_user.user_avatar, class: "profile_image" %>
-  <%elsif current_user %>
-    <%= image_tag image_url("default_profile.jpg"), class: "profile_image" %>
-  <% end %>
-  <li class="nav-item">
-    <%= link_to "All Products", products_path, class: "nav-link" %>
-  </li>
-</ul>
-<% if current_user %>
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <%= link_to "My Products", current_user_products_products_path,  class: "nav-link"%>
-    </li>
-    <li class="nav-item">
-      <%= link_to "My Shopping Cart", shipments_path,  class: "nav-link" %>
-    </li>
-    <li class="nav-item">
-      <%= link_to "Create Product", new_product_path,  class: "nav-link" %>
-    </li>
-    <li class="nav-item">
-      <%= link_to "Update Profile", edit_user_registration_path,  class: "nav-link" %>
-    </li>
-    <li class="nav-item">
-      <%= link_to "Delete Account", user_registration_path, method: :delete, data: {confirm: 'Are you sure ?'},  class: "nav-link" %>
-    </li>
-    <li class="nav-item">
-      <%= link_to "Sign Out", destroy_user_session_path, method: :delete,  class: "nav-link btn btn-dark" %>
-    </li>
-  </ul>
-  <ul class="navbar-nav ml-auto">
-    <%= form_tag products_path, method: :get, class: "form-inline my-2 my-lg-0" do %>
-      <%= text_field_tag :search, params[:search], class: "form-control mr-sm-2" %>
-      <%= submit_tag "Search", name: nil, class: "btn btn-outline-success my-2 my-sm-0" %>
-    <% end %>
-  </ul>
-<% else %>
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <%= link_to "Sign Up", new_user_registration_path, class: "nav-link btn btn-dark" %>
-    </li>
-    <li class="nav-item">
-      <%= link_to "Sign In", new_user_session_path,  class: "nav-link btn btn-dark" %>
-    </li>
-  </ul>
-<% end %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <% if current_user %>
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <% if current_user.user_avatar.attached? %>
+            <%= image_tag current_user.user_avatar, class: "profile_image" %>
+          <%else%>
+            <%= image_tag image_url("default_profile.jpg"), class: "profile_image" %>
+          <%end%>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <%= link_to "Update Profile", edit_user_registration_path,  class: "dropdown-item" %>
+          <%= link_to "Delete Account", user_registration_path, method: :delete, data: {confirm: 'Are you sure ?'},  class: "dropdown-item" %>
+          <div class="dropdown-divider"></div>
+          <%= link_to "Sign Out", destroy_user_session_path, method: :delete,  class: "dropdown-item" %>
+        </div>
+      </li>
+    </ul>
+  <%end%>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <%= link_to "All Products", products_path, class: "nav-link" %>
+      </li>
+      <% if current_user %>
+        <li class="nav-item">
+          <%= link_to "My Products", current_user_products_products_path,  class: "nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%= link_to "My Shopping Cart", shipments_path,  class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Create Product", new_product_path,  class: "nav-link" %>
+        </li>
+      <%else%>
+        <li class="nav-item">
+          <%= link_to "Sign Up", new_user_registration_path, class: "nav-link btn btn-dark" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Sign In", new_user_session_path,  class: "nav-link btn btn-dark" %>
+        </li>
+      <%end%>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <% if current_user %>
+        <%= form_tag products_path, method: :get, class: "form-inline my-2 my-lg-0" do %>
+          <%= text_field_tag :search, params[:search], class: "form-control mr-sm-2" %>
+          <%= submit_tag "Search", name: nil, class: "btn btn-outline-success my-2 my-sm-0" %>
+        <% end %>
+      <%end%>
+    </ul>
+  </div>
+</nav>
+

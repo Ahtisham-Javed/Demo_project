@@ -9,9 +9,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body class="background_gray">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <%= render 'layouts/navbar_content' %>
-    </nav>
+    <%= render 'layouts/navbar_content' %>
     <%= render 'layouts/alerts' if !flash.empty? %>
     <%= yield %>
   </body>

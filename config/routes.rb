@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
 
-  get 'shipments/index'
-  get 'comments/new'
   root 'products#home'
 
-  # devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
@@ -13,9 +10,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :edit, :update, :destroy]
   end
 
-  resources :shipments, except: [:new, :show] do
-    get "checkout_form", on: :collection
-  end
+  resources :shipments, except: [:new, :show]
 
   scope '/checkout' do 
     post 'create', to: "checkout#create", as: 'checkout_create'

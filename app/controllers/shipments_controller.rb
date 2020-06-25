@@ -8,7 +8,7 @@ class ShipmentsController < ApplicationController
 
   def update
     @shipment = Shipment.find(params[:id])
-    if @shipment.update(quantity: shipment_params[:quantity])
+    if @shipment.update!(quantity: shipment_params[:quantity])
       redirect_to shipments_path, notice: "Quantity updated"
     else
       render 'edit'
@@ -22,7 +22,7 @@ class ShipmentsController < ApplicationController
 
   def create
     @shipment = Shipment.new(shipment_params)
-    if @shipment.save
+    if @shipment.save!
       redirect_to products_path(params[:product_id]), notice: "Product has been added to cart"
     else
       render products_path(params[:product_id])
@@ -31,7 +31,7 @@ class ShipmentsController < ApplicationController
 
   def destroy
     @shipment = Shipment.find(params[:id])
-    @shipment.destroy
+    @shipment.destroy!
     redirect_to shipments_path, notice: "Product has been removed from cart"
   end
 

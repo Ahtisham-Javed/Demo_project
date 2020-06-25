@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
 
-	# before_action :set_cache_headers, only: [:new, :create, :edit, :update]
 	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :current_user_products]
 
 	def index
@@ -14,8 +13,11 @@ class ProductsController < ApplicationController
 	def create
 		@user = User.find(current_user.id)
 		@product = @user.products.create!(product_params)
-		@product.update(serial_number: generate_serial_number(@product.id))
-		redirect_to product_path(@product), notice: "Product has been added successfully!"
+		if (@product.save!)
+			redirect_to product_path(@product), notice: "Product has been added successfully!"
+		else
+			render 'new'
+		end
 	end
 
 	def edit
@@ -24,7 +26,7 @@ class ProductsController < ApplicationController
 
 	def update
 		@product = Product.find(params[:id])
-		if @product.update(product_params)
+		if @product.update!(product_params)
 			redirect_to @product, notice: "Updated product successfully!"
 		else
 			render 'edit'
@@ -46,31 +48,12 @@ class ProductsController < ApplicationController
 	end
 
 	def current_user_products
-		# authenticate_user
 		@products = Product.where(user_id: current_user.id).all
 		render 'index'
 	end
 
 	private
-	def product_params
-		params.require(:product).permit(:title, :price, :availability,:description,product_images: [])
-	end
-
-	def generate_serial_number id
-		"PLN-%.6d" % id
-	end
-
-		# def set_cache_headers
-		# 	response.headers["Cache-Control"] = "no-cache, no-store"
-    # 	response.headers["Pragma"] = "no-cache"
-		# 	response.headers["Expires"] = "Mon, 01 Jan 1990 00:00:00 GMT"
-		# 	authenticate_user
-		# end
-
-		# def authenticate_user
-		# 	if current_user.nil?
-		# 	  redirect_to new_user_session_path and return
-		# 	end
-		# end
-
+		def product_params
+			params.require(:product).permit(:title, :price, :availability, :description, product_images: [])
+		end
 end

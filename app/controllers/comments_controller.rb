@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
   def update
     @product = Product.find(params[:product_id])
     @comment = @product.comments.find(params[:id])
-    if @comment.update(comment_params)
+    if @comment.update!(comment_params)
       redirect_to product_path(@product), notice: "Comment has been updated successfully"
     else
       render 'edit'

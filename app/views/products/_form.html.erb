@@ -8,7 +8,7 @@
   <div class = 'form-group'>
     <p>
       <%= f.label :price %><br>
-      <%= f.number_field :price, required: true, class: 'form-control' %>
+      <%= f.number_field :price, min: 0, required: true, class: 'form-control' %>
     </p>
   </div>
   <div class = 'form-check'>

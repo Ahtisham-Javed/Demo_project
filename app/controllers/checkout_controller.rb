@@ -22,7 +22,7 @@ class CheckoutController < ApplicationController
         quantity: 1
       }],
       mode: 'payment',
-      success_url: checkout_success_url + '?cart_id: ' + cart_id
+      success_url: checkout_success_url + '?cart_id= ' + cart_id
       cancel_url: checkout_cancel_url,
     })
     
@@ -32,8 +32,9 @@ class CheckoutController < ApplicationController
   end
 
   def success
-    # render plain: params[:cart_id]
-    
+    # render plain: params[:cart_id].to_s
+    Shipment.where(cart_id: params[:cart_id]).update!(status: true)
+    redirect_to products_path, notice: 'Your order has been placed successfully'
   end
 
   def cancel

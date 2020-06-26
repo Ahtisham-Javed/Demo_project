@@ -12,9 +12,10 @@ class ProductsController < ApplicationController
 
 	def create
 		@user = User.find(current_user.id)
-		@product = @user.products.create!(product_params)
+		@product = @user.products.new(product_params)
 		if (@product.save!)
 			redirect_to product_path(@product), notice: "Product has been added successfully!"
+			UserMailer.with(user: User.find(current_user.id), product: @product).product_creation.deliver_now
 		else
 			render 'new'
 		end

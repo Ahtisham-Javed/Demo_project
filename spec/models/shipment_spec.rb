@@ -2,34 +2,41 @@ require 'rails_helper'
 
 RSpec.describe Shipment, type: :model do
   context "validation tests" do
+    let!(:shipment) {build(:random_shipment)}
     it "ensures product presence" do
       expect {
-        Shipment.create!(cart_id: 1, quantity: 1)
+        shipment.product_id = nil
+        shipment.save!
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
-    it "ensures user presence" do
+    it "ensures cart presence" do
       expect {
-        Shipment.create!(product_id: 1, quantity: 1)
+        shipment.cart_id = nil
+        shipment.save!
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
     it "ensures quantity presence" do
       expect {
-        Shipment.create!(cart_id: 1, product_id: 1)
+        shipment.quantity = nil
+        shipment.save!
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
     it "ensures quantity to be integer" do
       expect {
-        Shipment.create!(cart_id: 1, product_id: 1, quantity: "temporary")
+        shipment.quantity = "temporary"
+        shipment.save!
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
     it "ensures foreign key constraint for invalid cart" do
       expect {
-        Shipment.create!(cart_id: 999, product_id: 1, quantity: 1)
+        shipment.cart_id = 9999
+        shipment.save!
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
     it "ensures foreign key constraint for invalid product" do
       expect {
-        Shipment.create!(cart_id: 1, product_id: 999, quantity: 1)
+        shipment.product_id = 9999
+        shipment.save!
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end

@@ -20,6 +20,6 @@ class User < ApplicationRecord
       if (@cart.save == false)
         User.destroy(User.find(id))
       end
-    end
-
+    end   
+    
 end

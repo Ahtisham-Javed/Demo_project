@@ -17,6 +17,6 @@ class Product < ApplicationRecord
 
   private
     def generate_serial_number
-      update_attribute(:serial_number, "PLN-%.6d" % self.id)
+      update(serial_number: "PLN-#{id}")
     end
 end

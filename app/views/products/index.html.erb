@@ -1,21 +1,23 @@
 <h1 class="heading_setting">All Products</h1>
 <div class="card-deck" style="margin: 3%">
 	<% @products.each do |p|%>
-		<div class="card">
-	    <div class="card-body">
-	    	<% if p.product_images.attached? %>
-	    		<%= image_tag p.resize_image(0), width: "100%", height: "60%" %>
-	    	<%else%>
-	    		<%= image_tag "package.jpg", width: "100%", height: "60%" %>
-	    	<%end%>
-	      <h3 class="card-title">Title: <%= link_to p.title, product_path(p) %></h3>
-	      <h4 class="card-title">Price: $<%= p.price %></h4>
-	      <% if p.availability == true %>
-		    	<h5 class="card-title">Available: Yes</h5>
-		    <%else%>
-		    	<h5 class="card-title">Available: Out of stock</h5>
-		    <%end%>
-	    </div>
-		</div>
+		<%= link_to product_path(p) do %>
+			<div class="card">
+				<div class="card-body">
+					<% if p.product_images.attached? %>
+						<%= image_tag p.resize_image(0), width: "100%", height: "60%" %>
+					<%else%>
+						<%= image_tag "package.jpg", width: "100%", height: "60%" %>
+					<%end%>
+					<h3 class="card-title">Title: <%= link_to p.title, product_path(p) %></h3>
+					<h4 class="card-title">Price: $<%= p.price %></h4>
+					<% if p.availability == true %>
+						<h5 class="card-title">Available: Yes</h5>
+					<%else%>
+						<h5 class="card-title">Available: Out of stock</h5>
+					<%end%>
+				</div>
+			</div>
+		<%end%>
 	<% end %>
 </div>

@@ -1,15 +1,15 @@
 class CommentsController < ApplicationController
 
   before_action :authenticate_user! 
-  
+
   def create
     @product = Product.find(params[:product_id])
     @comment = @product.comments.build(comment_params)
     @comment.user_id = current_user.id
-    if @comment.save!
+    if @comment.save
       redirect_to product_path(@product), notice: "Comment has been created successfully"
     else
-      render product_path(@product)
+      redirect_to product_path(@product), notice: "Invalid comment"
     end
   end
 
@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
   def update
     @product = Product.find(params[:product_id])
     @comment = @product.comments.find(params[:id])
-    if @comment.update!(comment_params)
+    if @comment.update(comment_params)
       redirect_to product_path(@product), notice: "Comment has been updated successfully"
     else
       render 'edit'

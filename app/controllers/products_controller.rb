@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-
+	
 	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :current_user_products]
 
 	def index
@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
 	def create
 		@user = User.find(current_user.id)
 		@product = @user.products.new(product_params)
-		if (@product.save!)
+		if (@product.save)
 			redirect_to product_path(@product), notice: "Product has been added successfully!"
 			UserMailer.with(user: User.find(current_user.id), product: @product).product_creation.deliver_now
 		else
@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
 
 	def update
 		@product = Product.find(params[:id])
-		if @product.update!(product_params)
+		if @product.update(product_params)
 			redirect_to @product, notice: "Updated product successfully!"
 		else
 			render 'edit'
@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
 		if Product.exists?(params[:id])
 			@product = Product.find(params[:id])
 		else
-			render :file => 'public/404.html'
+			render :file => 'public/404.html', status: 404
 		end
 	end
 

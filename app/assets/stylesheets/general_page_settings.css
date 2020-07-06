@@ -1,16 +1,26 @@
+.img-bg{
+	background-image: url("bg.jpg");
+}
+
+.banner_height{
+  height: 250px;
+  object-fit: fill;
+}
+
+.product-image-height{
+	max-height: 100%;
+  object-fit: fill;
+}
+
 .margin_on_both_sides{
 	padding-top: 3%;
 	padding-bottom: 3%;
-	margin-left: 30%;
-	margin-right: 30%;
-}
-
-.background_gray{
-	background-color: gray;
+	padding-left: 30%;
+	padding-right: 30%;
 }
 
 .heading_setting {
-	color: yellow;
+	color: green;
 	text-align: center;
 	font-style: italic;
 	font-family: arial;

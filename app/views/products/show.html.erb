@@ -51,7 +51,7 @@
 		<br/>
 
 		<% if current_user && @product.user_id != current_user.id %>
-			<% unless Shipment.where(cart_id: Cart.find_by_user_id(current_user.id),product_id: @product.id).exists? %>
+			<% unless Shipment.where(cart_id: Cart.find_by_user_id(current_user.id),product_id: @product.id,status: false).exists? %>
 				<%= render partial: 'shipments/form', locals: {cart: Cart.find_by_user_id(current_user.id), product: @product,
 					shipment: Shipment.new } %>
 			<%end%>

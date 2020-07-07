@@ -23,6 +23,12 @@
 	<%end%>
 	<% if @shipments.size > 0 %>
 		<h3>Grand Total: $<%= total %></h3>
-		<%= link_to "Buy Now", checkout_create_path(:shipments => @shipments.map(&:id)), method: :post,remote: true, class: "btn btn-success btn-lg btn-block" %>
+		<%= form_tag checkout_create_path(:shipments => @shipments.map(&:id)), method: :post,remote: true do %>
+			<%= text_field_tag :coupon, nil, placeholder: 'Enter coupon here if any...',
+				class: 'form-control' %>
+			<br>
+			<%= submit_tag "Buy Now", class: "btn btn-success btn-lg btn-block" %>
+		<% end %>
+		<br>
 	<%end%>
 </div>

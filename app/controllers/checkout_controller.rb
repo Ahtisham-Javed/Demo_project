@@ -11,7 +11,11 @@ class CheckoutController < ApplicationController
     shipments.each do |shipment|
       total = total + (shipment.quantity * shipment.product.price)
     end
-
+    discounts = {'DEVSINC': 0.3, 'PAKARMY': 0.5}
+    if (params[:coupon] != "" && !discounts[params[:coupon].to_sym].nil?)
+      total = total - (total * discounts[params[:coupon].to_sym])
+      total = total.round
+    end
     @session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
       line_items: [{

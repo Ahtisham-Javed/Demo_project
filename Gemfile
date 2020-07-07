@@ -1,21 +1,6 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'mysql2',          '~> 0.4.10', :platform => :ruby
-gem 'jdbc-mysql',      '= 5.1.35',  :platform => :jruby
-gem 'thinking-sphinx', '~> 4.0'
-
-gem 'stripe'
-
-ruby '2.7.0'
-
-gem "mini_magick"
-
-gem 'devise'
-
-gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
-
-gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
@@ -32,10 +17,26 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-gem 'image_processing', '~> 1.2'
+# gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
+
+gem 'mysql2',          '~> 0.4.10', :platform => :ruby
+gem 'jdbc-mysql',      '= 5.1.35',  :platform => :jruby
+gem 'thinking-sphinx', '~> 4.0'
+
+gem 'stripe'
+
+ruby '2.7.0'
+
+gem "mini_magick"
+
+gem 'devise'
+
+gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
+
+gem 'pg'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

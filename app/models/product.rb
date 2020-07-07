@@ -11,8 +11,8 @@ class Product < ApplicationRecord
   has_many :shipments, dependent: :destroy
   has_many :carts, through: :shipments
 
-  def resize_image input
-  	self.product_images[input].variant(resize_to_limit: [500,500]).processed
+  def resize_image(idx,width,height)
+    self.product_images[idx].variant(resize_to_fill: [width,height]).processed
   end
 
   private

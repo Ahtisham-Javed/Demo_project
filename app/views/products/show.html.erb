@@ -2,16 +2,22 @@
 	<div class="col-md-6">
 		<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="3000">
 			<div class="carousel-inner">
-				<% @product.product_images.each_with_index do |image,index| %>
-					<% if index == 0 %>
-						<div class="carousel-item active">
-							<%= image_tag @product.resize_image(index), class: "d-block w-100 product-image-height" %>
-						</div>
-					<%else%>
-						<div class="carousel-item">
-							<%= image_tag @product.resize_image(index), class: "d-block w-100 product-image-height" %>
-						</div>
-					<%end%>	
+				<% if @product.product_images.attached? %>
+					<% @product.product_images.each_with_index do |image,index| %>
+						<% if index == 0 %>
+							<div class="carousel-item active">
+								<%= image_tag @product.resize_image(index,1000,800), class: "d-block w-100 product-image-height" %>
+							</div>
+						<%else%>
+							<div class="carousel-item">
+								<%= image_tag @product.resize_image(index,1000,800), class: "d-block w-100 product-image-height" %>
+							</div>
+						<%end%>	
+					<%end%>
+				<%else%>
+					<div class="carousel-item active">
+						<%= image_tag "package.jpg", class: "d-block w-100 product-image-height", height: 500 %>
+					</div>
 				<%end%>
 			</div>
 			<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

@@ -3,7 +3,7 @@ class Product < ApplicationRecord
   validates :price, presence: true, numericality: { only_integer: true }
   validates :user_id, presence: true
 
-  after_create :generate_serial_number
+  after_create :generate_serial_number, :send_add_product_mail
 
   has_many_attached :product_images
   belongs_to :user
@@ -18,5 +18,9 @@ class Product < ApplicationRecord
   private
     def generate_serial_number
       update(serial_number: "PLN-#{id}")
+    end
+
+    def send_add_product_mail
+      UserMailer.product_creation(self.user, self).deliver_now
     end
 end

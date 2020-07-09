@@ -33,7 +33,7 @@
 	<div class="col-md-6">
 		<div class="card">
 			<div class="card-body">
-				<h3 class="card-title">Title: <%= @product.title %></h3>
+				<h3 class="card-title">Title: <%= @product.title.upcase %></h3>
 				<h4 class="card-title">Price: $<%= @product.price %></h4>
 				<% if @product.availability == true %>
 					<h5 class="card-title">Available: Yes</h5>
@@ -43,14 +43,20 @@
 				<h5 class="card-title">Serial Number: <%= @product.serial_number %></h5>
 				<p class="card-text">Description: <%= @product.description %></p>
 				<% if current_user && current_user.id == @product.user_id %>
-					<%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-info" %>
-					<%= link_to "Delete Product", product_path(@product), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-info" %>
+					<div class="row">
+						<div class="col-6">
+							<%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-info btn-block" %>
+						</div>
+						<div class="col-6">
+							<%= link_to "Delete Product", product_path(@product), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-info btn-block" %>
+						</div>
+					</div>
 				<%end%>
 			</div>
 		</div>
 		<br/>
 
-		<% if current_user && @product.user_id != current_user.id %>
+		<% if current_user && @product.user_id != current_user.id && @product.availability%>
 			<% unless Shipment.where(cart_id: Cart.find_by_user_id(current_user.id),product_id: @product.id,status: false).exists? %>
 				<%= render partial: 'shipments/form', locals: {cart: Cart.find_by_user_id(current_user.id), product: @product,
 					shipment: Shipment.new } %>
@@ -59,10 +65,9 @@
 	</div>
 </div>
 <hr>
-<div style="margin:2%">
+<div style="margin:1%">
 	<h2 class="heading_setting">Comments</h2>
 	<%= render @product.comments %>
-	<hr>
 	<% if current_user && @product.user_id != current_user.id %>
 		<div style="margin-left:10%;margin-right:10%;">
 			<%= render partial: 'comments/form', locals: {product: @product, comment: @product.comments.build } %>

@@ -17,8 +17,8 @@ class User < ApplicationRecord
   private
     def create_cart(id)
       @cart = Cart.new(user_id: id)
-      if (@cart.save == false)
-        User.destroy(User.find(id))
+      unless @cart.save
+        self.destroy
       end
     end   
     

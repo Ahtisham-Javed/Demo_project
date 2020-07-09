@@ -1,11 +1,11 @@
 <div class = "margin_on_both_sides">
 	<h1 class="heading_setting">Edit Shipment</h1>
-	<h3>Title: <%= @shipment.product.title %></h3>
+	<h3>Title: <%= @shipment.product.title.upcase %></h3>
 	<h4>Price: <%= @shipment.product.price %></h4>
 	<% if @shipment.product.availability == true %>
-  	<h4 class="card-title">Available: Yes</h5>
+  	<h4>Available: Yes</h5>
   <%else%>
-  	<h4 class="card-title">Available: Out of stock</h5>
+  	<h4>Available: Out of stock</h5>
   <%end%>
 	<h5>Serial Number: <%= @shipment.product.serial_number %></h5	>
 	<p>Description: <%= @shipment.product.description %></p>

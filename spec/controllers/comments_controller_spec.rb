@@ -35,12 +35,14 @@ RSpec.describe CommentsController, type: :controller do
     it "updates the comment successfully" do
       patch :update, params: {id: comment.id, product_id: comment.product.id, comment: {comment: "an updated comment"}}
       comment.reload
+      expect(comment.comment).to eq("an updated comment")
       expect(response).to redirect_to(product_path(assigns(:product)))
     end
     it "renders the edit page for invalid update" do
       allow_any_instance_of(Comment).to receive(:update).and_return(false)
       patch :update, params: {id: comment.id, product_id: comment.product.id, comment: {comment: "an updated comment"}}
       comment.reload
+      expect(comment.comment).not_to eq("an updated comment")
       expect(response).to render_template(:edit)
     end
   end

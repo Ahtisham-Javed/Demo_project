@@ -1,10 +1,9 @@
 <div class = "margin_on_both_sides">
-	<h1 class="heading_setting">My Shopping Cart</h1>
 	<% total = 0 %>
 	<% @shipments.each do |shipment| %>
 		<div class="row">
 			<div class="col-md-10">
-			  <h3>Title: <%= shipment.product.title %></h3>
+			  <h3>Title: <%= shipment.product.title.upcase %></h3>
 			  <h4>Price: $<%= shipment.product.price %></h4>
 			  <h5>Quantity: <%= shipment.quantity %></h5>
 			  <h5>Subtotal: $<%= shipment.quantity * shipment.product.price%></h5>

@@ -68,8 +68,11 @@ RSpec.describe ProductsController, type: :controller do
     it "updates the product and redirect successfully" do
       sign_in_user
       patch :update, params: {id: product.id, product: {title: "abcde", description:"a product", price: 789, availability: false}}
-      product.reload
       expect(assigns(:product)).to eq(product)
+      product.reload
+      expect(product.title).to eq("abcde")
+      expect(product.description).to eq("a product")
+      expect(product.price).to eq 789
       expect(response).to redirect_to(assigns(:product))
     end
     it "renders the edit page for invalid update" do
@@ -77,6 +80,9 @@ RSpec.describe ProductsController, type: :controller do
       allow_any_instance_of(Product).to receive(:update).and_return(false)
       patch :update, params: {id: product.id, product: {title: "abcde", description:"a product", price: 789, availability: false}}
       product.reload
+      expect(product.title).not_to eq("abcde")
+      expect(product.description).not_to eq("a product")
+      expect(product.price).not_to eq 789
       expect(response).to render_template(:edit)
     end
   end

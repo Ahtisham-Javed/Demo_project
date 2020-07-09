@@ -281,7 +281,6 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   jdbc-mysql (= 5.1.35)
   listen (~> 3.2)
-  mini_magick
   mysql2 (~> 0.4.10)
   pg
   puma (~> 4.1)

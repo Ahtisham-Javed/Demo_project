@@ -51,13 +51,19 @@ RSpec.describe ShipmentsController, type: :controller do
   context "#update" do
     before(:each){shipment}
     it "updates the shipment and redirects successfully" do
-      patch :update, params: {id: Shipment.first.id, shipment: {quantity: 1}}
+      temp = Shipment.first
+      patch :update, params: {id: temp.id, shipment: {quantity: 1}}
+      temp.reload
+      expect(temp.quantity).to eq 1
       expect(response).to redirect_to(shipments_path)    
     end
     it "renders the edit page for invalid update" do
       allow_any_instance_of(Shipment).to receive(:update).and_return(false)
-      patch :update, params: {id: Shipment.first.id, shipment: {quantity: 1}}
-      expect(response).to render_template(:edit)    
+      temp = Shipment.first
+      patch :update, params: {id: temp.id, shipment: {quantity: 1}}
+      temp.reload
+      expect(temp.quantity).not_to eq 1
+      expect(response).to render_template(:edit) 
     end
   end
   context "#destroy" do

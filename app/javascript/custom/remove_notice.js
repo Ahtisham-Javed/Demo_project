@@ -1,5 +1,5 @@
-$(document).ready(function() {
-  setTimeout(function() {
+$(document).ready(function () {
+  setTimeout(function () {
     $(".flash-messages").remove();
-  }, 5000);
+  }, 3000);
 });

@@ -19,7 +19,7 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-<div class="card-deck" style="margin: 3%">
+<div class="card-deck" style="margin: 2%">
 	<% @products.each do |p|%>
 		<%= link_to product_path(p) do %>
 			<div class="card">
@@ -29,8 +29,8 @@
 					<%else%>
 						<%= image_tag "package.jpg", width: "100%" %>
 					<%end%>
-					<h3 class="card-title">Title: <%= link_to p.title, product_path(p) %></h3>
-					<h4 class="card-title">Price: $<%= p.price %></h4>
+					<h4 class="card-title"><%= link_to p.title.upcase, product_path(p) %></h3>
+					<h5 class="card-title">Price: $<%= p.price %></h4>
 					<% if p.availability == true %>
 						<h5 class="card-title">Available: Yes</h5>
 					<%else%>

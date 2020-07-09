@@ -15,7 +15,6 @@ class ProductsController < ApplicationController
 		@product = @user.products.new(product_params)
 		if (@product.save)
 			redirect_to product_path(@product), notice: "Product has been added successfully!"
-			UserMailer.product_creation(User.find(current_user.id),@product).deliver_now
 		else
 			render 'new'
 		end

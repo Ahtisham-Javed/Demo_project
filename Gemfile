@@ -37,6 +37,9 @@ gem 'pg'
 
 gem 'rubocop', '~> 0.87.1', require: false
 
+gem 'sidekiq'
+# Sinatra has also been added using gem install sinatra
+
 # gem "mini_magick"
 
 group :development, :test do

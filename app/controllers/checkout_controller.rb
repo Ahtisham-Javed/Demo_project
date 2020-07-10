@@ -35,8 +35,9 @@ class CheckoutController < ApplicationController
   end
 
   def success
-    # render plain: params[:cart_id].to_s
     Shipment.where(cart_id: params[:cart_id]).update(status: true)
+    shipments = Shipment.where(cart_id: params[:cart_id], status: true, updated_at: 5.minutes.ago..Time.now).map(&:id)
+    ShipmentWorker.perform_in(24.hours, current_user.id, shipments)
     redirect_to products_path, notice: 'Your order has been placed successfully'
   end
 

@@ -1,0 +1,17 @@
+Hi,
+Your order has been shipped successfully
+Products Details are as follows:
+--------------------------------------------------
+--------------------------------------------------
+
+<% @shipments.each do |shipment| %>
+  Title: <%= shipment.product.title %>
+  Price: $<%= shipment.product.price %>
+  Serial Number: <%= shipment.product.serial_number %>
+  Quantity: <%= shipment.quantity %>
+  ----------------------------------
+<%end%>
+
+--
+Regards,
+Devsinc

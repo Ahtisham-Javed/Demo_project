@@ -66,7 +66,7 @@ private
   end
 
   def account_update_params
-      params.require(:user).permit(:name, :address, :email, :password, :password_confirmation, :current_password, :user_avatar)
+      params.require(:user).permit(:delete_user_avatar, :name, :address, :email, :password, :password_confirmation, :current_password, :user_avatar)
   end
 
 end

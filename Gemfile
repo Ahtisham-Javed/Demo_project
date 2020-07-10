@@ -35,6 +35,8 @@ gem 'devise'
 
 gem 'pg'
 
+gem 'rubocop', '~> 0.87.1', require: false
+
 # gem "mini_magick"
 
 group :development, :test do

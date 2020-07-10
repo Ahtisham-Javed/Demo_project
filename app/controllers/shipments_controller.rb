@@ -1,11 +1,11 @@
 class ShipmentsController < ApplicationController
-
   before_action :authenticate_user!
 
   def index
     @cart = Cart.find_by_user_id(current_user.id)
     @shipments = Shipment.where(cart_id: @cart.id, status: false)
-    #status false indicates that products have been added to cart but order has not been placed yet, and status true represents successfull shipments 
+    # Status false indicates that products have been added to cart but order has not been placed
+    # yet, and status true represents successfull shipments
   end
 
   def create
@@ -37,8 +37,8 @@ class ShipmentsController < ApplicationController
   end
 
   private
+
     def shipment_params
       params.require(:shipment).permit(:cart_id, :product_id, :quantity)
     end
-
 end

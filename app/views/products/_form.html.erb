@@ -30,6 +30,14 @@
     <%= f.label :Images, class: "custom-file-label" %>
     <%= f.file_field :product_images, multiple: true, class: "custom-file-input" %>
   </div>
+  <div class="form-group form-check">
+    <% if @product.persisted? && @product.product_images.attached? %>
+      <p>
+        <%= f.label "Delete all images", class: "form-check-label" %>
+        <%= f.check_box :delete_all_product_images, class: "form-check-label" %>
+      </p>
+    <%end%>
+  </div>
   <br>
   <br>
   <div class = "form-group" style='text-align: center;'>

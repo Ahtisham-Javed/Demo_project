@@ -1,19 +1,18 @@
 class CheckoutController < ApplicationController
-
   def create
     shipments = Shipment.find(params[:shipments])
-    if (shipments.nil?)
+    if shipments.nil?
       redirect_to shipments_path and return
     end
 
     cart_id = shipments[0].cart_id.to_s
     total = 0
     shipments.each do |shipment|
-      total = total + (shipment.quantity * shipment.product.price)
+      total += (shipment.quantity * shipment.product.price)
     end
-    discounts = {'DEVSINC': 0.3, 'PAKARMY': 0.5}
+    discounts = { 'DEVSINC': 0.3, 'PAKARMY': 0.5 }
     if (params[:coupon] != "" && !discounts[params[:coupon].to_sym].nil?)
-      total = total - (total * discounts[params[:coupon].to_sym])
+      total -= (total * discounts[params[:coupon].to_sym])
       total = total.round
     end
     @session = Stripe::Checkout::Session.create({
@@ -31,7 +30,7 @@ class CheckoutController < ApplicationController
     })
     
     respond_to do |format|
-      format.js {render 'create.js.erb'}
+      format.js { render 'create.js.erb' }
     end
   end
 
@@ -44,6 +43,4 @@ class CheckoutController < ApplicationController
   def cancel
     redirect_to shipments_path, notice: 'Sorry, Unable to place order'
   end
-
-
 end

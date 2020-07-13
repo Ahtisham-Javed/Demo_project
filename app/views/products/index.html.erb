@@ -1,7 +1,7 @@
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="3000">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      	<%= image_tag "home1.jpg", class: "d-block w-100 banner_height" %>
+      <%= image_tag "home1.jpg", class: "d-block w-100 banner_height" %>
     </div>
     <div class="carousel-item">
       <%= image_tag "home2.jpg", class: "d-block w-100 banner_height" %>
@@ -20,24 +20,24 @@
   </a>
 </div>
 <div class="card-deck" style="margin: 2%">
-	<% @products.each do |p|%>
-		<%= link_to product_path(p) do %>
-			<div class="card">
-				<div class="card-body">
-					<% if p.product_images.attached? %>
-						<%= image_tag p.resize_image(0,100,100), width: "100%" %>
-					<%else%>
-						<%= image_tag "package.jpg", width: "100%" %>
-					<%end%>
-					<h4 class="card-title"><%= link_to p.title.upcase, product_path(p) %></h3>
-					<h5 class="card-title">Price: $<%= p.price %></h4>
-					<% if p.availability == true %>
-						<h5 class="card-title">Available: Yes</h5>
-					<%else%>
-						<h5 class="card-title">Available: Out of stock</h5>
-					<%end%>
-				</div>
-			</div>
-		<%end%>
-	<% end %>
+  <% @products.each do |p|%>
+    <%= link_to product_path(p) do %>
+      <div class="card">
+        <div class="card-body">
+          <% if p.product_images.attached? %>
+            <%= image_tag p.resize_image(0,100,100), width: "100%" %>
+          <%else%>
+            <%= image_tag "package.jpg", width: "100%" %>
+          <%end%>
+          <h4 class="card-title"><%= link_to p.title.upcase, product_path(p) %></h3>
+          <h5 class="card-title">Price: $<%= p.price %></h4>
+          <% if p.availability == true %>
+            <h5 class="card-title">Available: Yes</h5>
+          <%else%>
+            <h5 class="card-title">Available: Out of stock</h5>
+          <%end%>
+        </div>
+      </div>
+    <%end%>
+  <%end%>
 </div>

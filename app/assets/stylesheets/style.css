@@ -1,9 +1,9 @@
 .bg{
-	background-color: #f3ecc2;
+  background-color: #f3ecc2;
 }
 
 .navbar-bg-custom{
-	background-color: #4a3f35;
+  background-color: #4a3f35;
 }
 
 .banner_height{
@@ -12,27 +12,27 @@
 }
 
 .product-image-height{
-	max-height: 100%;
-	object-fit: fill;
-	border-radius: 10%;
+  max-height: 100%;
+  object-fit: fill;
+  border-radius: 10%;
 }
 
 .margin_on_both_sides{
-	padding-top: 3%;
-	padding-bottom: 3%;
-	padding-left: 30%;
-	padding-right: 30%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  padding-left: 30%;
+  padding-right: 30%;
 }
 
 .heading_setting {
-	color: #14b1ab;
-	text-align: center;
-	font-style: italic;
-	font-family: 'Times New Roman', Times, serif;
-	padding: 2%;
-	font-size: 4vw;
+  color: #14b1ab;
+  text-align: center;
+  font-style: italic;
+  font-family: 'Times New Roman', Times, serif;
+  padding: 2%;
+  font-size: 4vw;
 }
 
 h3.card-title, h4.card-title a, h4.card-title, h5.card-title{
-	color: #595238;
+  color: #595238;
 }

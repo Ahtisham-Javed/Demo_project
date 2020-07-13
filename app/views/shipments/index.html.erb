@@ -1,33 +1,31 @@
 <div class = "margin_on_both_sides">
-	<% total = 0 %>
-	<% @shipments.each do |shipment| %>
-		<div class="row">
-			<div class="col-md-10">
-			  <h3>Title: <%= shipment.product.title.upcase %></h3>
-			  <h4>Price: $<%= shipment.product.price %></h4>
-			  <h5>Quantity: <%= shipment.quantity %></h5>
-			  <h5>Subtotal: $<%= shipment.quantity * shipment.product.price%></h5>
-			  <% total = total + (shipment.quantity * shipment.product.price) %>
-		  </div>
-		  <div style="padding: 1%" class="col-md-2">
-		  	<div style="margin-bottom: 10%" class="row">
-	  			<%= link_to "Edit", edit_shipment_path(shipment), class: "btn btn-info btn-block"  %>
-		  	</div>
-		  	<div class="row">
-		  		<%= link_to "Remove", shipment_path(shipment), method: :delete, data: {confirm: "Are u sure ?"}, class: "btn btn-info btn-block" %>
-		  	</div>
-		  </div>
-		</div>
-	  <hr>
-	<%end%>
-	<% if @shipments.size > 0 %>
-		<h3>Grand Total: $<%= total %></h3>
-		<%= form_tag checkout_create_path(:shipments => @shipments.map(&:id)), method: :post,remote: true do %>
-			<%= text_field_tag :coupon, nil, placeholder: 'Enter coupon here if any...',
-				class: 'form-control' %>
-			<br>
-			<%= submit_tag "Buy Now", class: "btn btn-success btn-lg btn-block" %>
-		<% end %>
-		<br>
-	<%end%>
+  <% total = 0 %>
+  <% @shipments.each do |shipment| %>
+    <div class="row">
+      <div class="col-md-10">
+	<h3>Title: <%= shipment.product.title.upcase %></h3>
+	<h4>Price: $<%= shipment.product.price %></h4>
+	<h5>Quantity: <%= shipment.quantity %></h5>
+	<h5>Subtotal: $<%= shipment.quantity * shipment.product.price%></h5>
+	<% total = total + (shipment.quantity * shipment.product.price) %>
+    </div>
+    <div style="padding: 1%" class="col-md-2">
+      <div style="margin-bottom: 10%" class="row">
+	<%= link_to "Edit", edit_shipment_path(shipment), class: "btn btn-info btn-block"  %>
+      </div>
+      <div class="row">
+	<%= link_to "Remove", shipment_path(shipment), method: :delete, data: {confirm: "Are u sure ?"}, 
+	  class: "btn btn-info btn-block" %>
+      </div>
+    </div>
+  </div><hr>
+  <%end%>
+  <% if @shipments.size > 0 %>
+    <h3>Grand Total: $<%= total %></h3>
+    <%= form_tag checkout_create_path(:shipments => @shipments.map(&:id)), method: :post,remote: true do %>
+      <%= text_field_tag :coupon, nil, placeholder: 'Enter coupon here if any...',
+	class: 'form-control' %><br>
+      <%= submit_tag "Buy Now", class: "btn btn-success btn-lg btn-block" %>
+    <%end%><br>
+  <%end%>
 </div>

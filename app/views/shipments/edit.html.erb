@@ -1,21 +1,21 @@
 <div class = "margin_on_both_sides">
-	<h1 class="heading_setting">Edit Shipment</h1>
-	<h3>Title: <%= @shipment.product.title.upcase %></h3>
-	<h4>Price: <%= @shipment.product.price %></h4>
-	<% if @shipment.product.availability == true %>
-  	<h4>Available: Yes</h5>
+  <h1 class="heading_setting">Edit Shipment</h1>
+  <h3>Title: <%= @shipment.product.title.upcase %></h3>
+  <h4>Price: <%= @shipment.product.price %></h4>
+  <% if @shipment.product.availability == true %>
+    <h4>Available: Yes</h5>
   <%else%>
-  	<h4>Available: Out of stock</h5>
+    <h4>Available: Out of stock</h5>
   <%end%>
-	<h5>Serial Number: <%= @shipment.product.serial_number %></h5	>
-	<p>Description: <%= @shipment.product.description %></p>
-	<%= form_for @shipment, url: shipment_path(@shipment) do |f|%>
-		<div class = "form-group">
-	  	<%= f.label :quantity %>:
-	  	<%= f.number_field :quantity, value: @shipment.quantity, min: 1, max: 50, step: 1, class: "form-control" %>
-	  </div>
-	  <div class = "form-group">
-	  	<%= f.submit class: "btn btn-success btn-block" %>
-		</div>
-	<%end%>
+  <h5>Serial Number: <%= @shipment.product.serial_number %></h5	>
+  <p>Description: <%= @shipment.product.description %></p>
+  <%= form_for @shipment, url: shipment_path(@shipment) do |f|%>
+    <div class = "form-group">
+      <%= f.label :quantity %>:
+      <%= f.number_field :quantity, value: @shipment.quantity, min: 1, max: 50, step: 1, class: "form-control" %>
+    </div>
+    <div class = "form-group">
+      <%= f.submit class: "btn btn-success btn-block" %>
+    </div>
+  <%end%>
 </div>
